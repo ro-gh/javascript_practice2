@@ -9,14 +9,14 @@
             tr.classList.remove('hide');
         });
         if (status === 'working'){
-            const trComplete = document.getElementsByTagName('tr.compelte');
+            const trComplete = document.getElementsByClassName('complete');
             Array.from(trComplete, tr => {
                 tr.classList.add('hide');
             });
-        } else if (status === 'comlete'){
-            const trWorking = document.getEelementsByTagName('tr.working');
+        } else if (status === 'complete'){
+            const trWorking = document.getElementsByClassName('working');
             Array.from(trWorking, tr => {
-                tr.classList.add('add');               
+                tr.classList.add('hide');               
             });
         }
     }
@@ -69,7 +69,7 @@
         //　ボタン押下時にタスクの状態を入れ替える
         statusButton.addEventListener('click', () => {
             task.classList.toggle('working');
-            task.classList.toggle('comolete');
+            task.classList.toggle('complete');
             if (statusButton.textContent === '作業中'){
                 statusButton.textContent = '完了';
             } else {
