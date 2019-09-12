@@ -1,5 +1,4 @@
 
-
     //　タスクの通し番号定義　0 を代入しないとNaN が表示される
     let taskId = 0;;
     //　リストの表示を変える関数
@@ -47,7 +46,7 @@
         return deleteButton;
     }
 
-    //　番号　再振り分け
+    /*番号　再振り分け　元のコード
     const updateId = () => {
         const taskList = document.getElementsByTagName('tr');
         taskId = 0;
@@ -60,6 +59,29 @@
         });
         taskId--;
     }
+    */
+    // 上記を変更したコード
+    const updateId = () => {
+        // 先にtrだを取得すると他の余計なtrも取得してしまうため、
+        // 1.tbodyを先に取得
+        // 2.tbody内に後から追加されるtrを取得する
+        const tbody = document.getElementById('tbody'); // ①
+        const taskList = tbody.getElementsByTagName('tr'); // ②
+        taskId = 0; // ③
+        Array.from(taskList, tr => {
+            taskId++; // ④
+            tr.getElementsByTagName('td')[0].textContent = taskId; // ⑤
+        })
+    }
+    /** 今回リファクタリングする際に①、②、、④のみ理解できていたが、
+     * 1.関数内で①、②の後にtaskIdの初期化
+     * 2.元の「taskId--」に代替するコード
+     * が中々思い浮かばなかった 
+     * ⑤はHTMLCollectionの概念を把握した上で扱わないと、以後似たような
+     * 失敗に陥る可能性大
+     * 
+     */
+
 
     //　状態ボタンを生成
     const createStatusButton = task => {
